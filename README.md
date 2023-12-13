@@ -1,0 +1,3 @@
+# DevAssistant Templates
+
+This repository provides Flake.nix and .gitignore templates for use with [DevAssistant](https://github.com/spector700/DevAssistant), a development environment automation tool.
