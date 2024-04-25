@@ -39,11 +39,8 @@
               fmt
             ];
 
-            # Workaround: make vscode's python extension read the .venv
             shellHook = ''
-              echo "welcome to python" | ${pkgs.lolcat}/bin/lolcat
-              venv="$(cd $(dirname $(which python)); cd ..; pwd)"
-              ln -Tsf "$venv" .venv
+              echo "welcome to C++" | ${pkgs.lolcat}/bin/lolcat
             '';
           };
         }
