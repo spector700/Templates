@@ -5,7 +5,8 @@
   };
 
   # Flake outputs
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       # Systems supported
       allSystems = [
@@ -16,35 +17,35 @@
       ];
 
       # Helper to provide system-specific attributes
-      forAllSystems = f: nixpkgs.lib.genAttrs allSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
+      forAllSystems =
+        f: nixpkgs.lib.genAttrs allSystems (system: f { pkgs = import nixpkgs { inherit system; }; });
     in
     {
       # Development environment output
-      devShells = forAllSystems ({ pkgs }: {
-        default =
-          pkgs.mkShell {
+      devShells = forAllSystems (
+        { pkgs }:
+        {
+          default = pkgs.mkShell {
             # The Nix packages provided in the environment
             packages = with pkgs; [
-               # standard toolkit
-              pkgs.nodejs # nixpkgs provides a "nodejs" package that corresponds to the current LTS version of nodejs, but you can specify a version (i.e node_20) if necessary
-              pkgs.yarn
-              pkgs.pnpm # a faster alternative to npm and yarn, with a less adopted toolchain
-          
-              # optionally required by your code editor to lint and format your code
-              pkgs.nodePackages.prettier # formatter
-              pkgs.nodePackages.eslint # linter
-          
-              # example package to serve a static nextjs export
-              pkgs.nodePackages.serve
+              # standard toolkit
+              nodejs # nixpkgs provides a "nodejs" package that corresponds to the current LTS version of nodejs, but you can specify a version (i.e node_20) if necessary
+              yarn
+              pnpm # a faster alternative to npm and yarn, with a less adopted toolchain
 
+              # optionally required by your code editor to lint and format your code
+              nodePackages.prettier # formatter
+              nodePackages.eslint # linter
+
+              # example package to serve a static nextjs export
+              nodePackages.serve
             ];
 
             shellHook = ''
               echo "welcome to NodeJS" | ${pkgs.lolcat}/bin/lolcat
             '';
           };
-      });
+        }
+      );
     };
 }
