@@ -22,7 +22,7 @@
           description = "NodeJS template";
         };
 
-        cpp = {
+        "C++" = {
           path = ./C++;
           description = "C++ template";
         };
