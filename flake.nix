@@ -1,24 +1,31 @@
 {
   description = "A collection of flake templates";
 
-  outputs = { self }: {
+  outputs =
+    { self }:
+    {
 
-    templates = {
+      templates = {
 
-      Python = {
-        path = ./Python;
-        description = "Python template";
-      };
+        Python = {
+          path = ./Python;
+          description = "Python template";
+        };
 
-      Rust = {
-        path = ./Rust;
-        description = "Rust template";
-      };
+        Rust = {
+          path = ./Rust;
+          description = "Rust template";
+        };
 
-      NodeJS = {
-        path = ./NodeJS;
-        description = "NodeJS template";
+        NodeJS = {
+          path = ./NodeJS;
+          description = "NodeJS template";
+        };
+
+        cpp = {
+          path = ./C++;
+          description = "C++ template";
+        };
       };
     };
-  };
 }
